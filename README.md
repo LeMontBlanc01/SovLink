@@ -106,10 +106,6 @@ Pas de compte à créer. Pas d'email à donner. À chaque connexion, une nouvell
 
 ---
 
-
-
----
-
 ## ★ Comment ça marche
 
 ```
@@ -124,10 +120,6 @@ Pas de compte à créer. Pas d'email à donner. À chaque connexion, une nouvell
      │         [ serveur TCP ]           │
      │    transmet. ne lit pas. oublie.  │
 ```
-
----
-
-
 ---
 
 ## ★ Contribuer
@@ -136,9 +128,6 @@ Fork, propose, améliore.
 Toute contribution qui renforce la **confidentialité** ou la **sobriété du code** est bienvenue.
 
 **Ce projet est sérieux. Les issues aussi. Les trolls beaucoup moins.**
-
----
-
 
 ---
 
