@@ -21,6 +21,7 @@
 ```
 
 </div>
+</div>
 
 ---
 
@@ -73,7 +74,6 @@ Pas de compte à créer. Pas d'email à donner. À chaque connexion, une nouvell
 /PROJET_SOCKET_CHIFRE
 
 │
-
 ├── /TP_SOCKET_SERVER
 
 │   ├── TP_SOCKET_SERVER.pro    # Ton fichier projet serveur 
