@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="media/sovlink_spin.gif" width="160" alt="SovLink"/>
+<img src="media/Logo_projet2.gif" width="160" alt="SovLink"/>
 
 <img src="https://readme-typing-svg.demolab.com?font=Share+Tech+Mono&size=38&duration=2800&pause=1200&color=CC0000&background=00000000&center=true&vCenter=true&width=620&height=65&lines=BIG+BROTHER WILL NOT WATCHING YOU !;0+historique" alt="SovLink typing"/>
 
