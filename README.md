@@ -13,6 +13,8 @@
 
 <br/>
 
+<div align="center">
+
 ```
   Big Brother vous regarde.
   SovLink, non.
