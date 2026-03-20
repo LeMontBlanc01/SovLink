@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="media/Logo_sovlink.png" width="160" alt="SovLink"/>
+<img src="media/Logo_sovlink.png" width="250" alt="SovLink"/>
 
 <br/>
 
