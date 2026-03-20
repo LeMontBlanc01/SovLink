@@ -13,7 +13,7 @@
 
 <br/>
 
-<div align="center">
+
 
 ```
   Big Brother vous regarde.
@@ -21,10 +21,9 @@
 ```
 
 </div>
-</div>
 
 ---
-
+<div align="center">
 ## ★ C'est quoi SovLink ?
 
 **SovLink** est une messagerie TCP chiffrée, conçue autour d'un principe simple :
@@ -132,7 +131,7 @@ Toute contribution qui renforce la **confidentialité** ou la **sobriété du co
 **Ce projet est sérieux. Les issues aussi. Les trolls beaucoup moins.**
 
 ---
-
+</div>
 <div align="center">
 
 ★  ★  ★
