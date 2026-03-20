@@ -133,9 +133,7 @@ Toute contribution qui renforce la **confidentialité** ou la **sobriété du co
 
 <div align="center">
 
-```
 ★  ★  ★
-```
 
 *SovLink — Groupe 3*
 **Ce qui a été dit ici ne sera plus demain.**
