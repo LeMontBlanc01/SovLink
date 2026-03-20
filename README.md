@@ -1,8 +1,6 @@
 <div align="center">
 
-<img src="Image/sovlink_spin.gif" width="160" alt="SovLink"/>
-
-<img src="https://readme-typing-svg.demolab.com?font=Share+Tech+Mono&size=38&duration=2800&pause=1200&color=CC0000&background=00000000&center=true&vCenter=true&width=620&height=65&lines=SOVLINK;CHIFFRÉ.+ÉPHÉMÈRE.+ANONYME;TU+PARLES.+ON+N'ÉCOUTE+PAS;0+COMPTE.+0+HISTORIQUE.+0+TRACE" alt="SovLink typing"/>
+<img src="media/Logo_sovlink.png width="160" alt="SovLink"/>
 
 <br/>
 
