@@ -1,0 +1,17 @@
+/PROJET_SOCKET_CHIFRE
+│
+├── /TP_SOCKET_SERVER
+│   ├── TP_SOCKET_SERVER.pro    # Ton fichier projet serveur 
+│   ├── main.cpp                # Instancie le serveur 
+│   ├── server.h                # Déclaration de la classe MyServer 
+│   ├── server.cpp              # Logique de routage par clé publique 
+│   └── protocol.h              # Structure commune des paquets (Shared)
+│
+├── /TP_SOCKET_CLIENT
+│   ├── TP_SOCKET_CLIENT.pro    # Ton fichier projet client 
+│   ├── main.cpp                # Boucle d'interaction utilisateur 
+│   ├── client.h                # Déclaration de la classe MyClient 
+│   ├── client.cpp              # Gestion des clés et du chiffrement 
+│   └── protocol.h              # Copie du fichier de structure (doit être identique)
+│
+└── /libs                       # (Optionnel) Si tu inclus libsodium en local
