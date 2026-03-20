@@ -2,7 +2,7 @@
 
 <img src="media/Logo_sovlink.png" width="800" alt="SovLink"/>
 
-<img src="https://readme-typing-svg.demolab.com?font=Share+Tech+Mono&size=42&duration=3000&pause=1500&color=CC0000&background=00000000&center=true&vCenter=true&width=600&height=60&lines=Big+brother+vous+regarde+mais+nous+non;0+historique;Tout+anonyme;" alt="SovLink"/>
+<img src="https://readme-typing-svg.demolab.com?font=Share+Tech+Mono&size=42&duration=3000&pause=1500&color=CC0000&background=00000000&center=true&vCenter=true&width=600&height=60&lines=0+historique;Tout+anonyme;" alt="SovLink"/>
 
 
 <br/>
