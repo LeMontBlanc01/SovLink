@@ -106,16 +106,7 @@ Pas de compte à créer. Pas d'email à donner. À chaque connexion, une nouvell
 
 ---
 
-## ★ Stack
 
-<div align="center">
-
-![C++](https://img.shields.io/badge/C++17-Langage_principal-00599C?style=for-the-badge&logo=c%2B%2B&logoColor=white)
-![Libsodium](https://img.shields.io/badge/Libsodium-Chiffrement_E2E-cc0000?style=for-the-badge&logo=letsencrypt&logoColor=white)
-![Boost Asio](https://img.shields.io/badge/Boost_Asio-Réseau_TCP-FF6600?style=for-the-badge&logoColor=white)
-![Qt](https://img.shields.io/badge/Qt_Creator-Interface-41CD52?style=for-the-badge&logo=qt&logoColor=white)
-
-</div>
 
 ---
 
