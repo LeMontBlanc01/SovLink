@@ -1,7 +1,7 @@
 <div align="center">
 
 <!-- ANIMATED LOGO — fichier à la racine du repo -->
-<img src="Image/sovlink_spin.gif" width="180" alt="SovLink Logo"/>
+<img src="media/sovlink_spin.gif" width="180" alt="SovLink Logo"/>
 <br/>
 
 <!-- TYPING ANIMATION TITLE -->
