@@ -13,6 +13,8 @@
 
 <br/>
 
+
+
 ```
   Big Brother vous regarde.
   SovLink, non.
@@ -21,7 +23,6 @@
 </div>
 
 ---
-
 ## ★ C'est quoi SovLink ?
 
 **SovLink** est une messagerie TCP chiffrée, conçue autour d'un principe simple :
@@ -71,7 +72,6 @@ Pas de compte à créer. Pas d'email à donner. À chaque connexion, une nouvell
 /PROJET_SOCKET_CHIFRE
 
 │
-
 ├── /TP_SOCKET_SERVER
 
 │   ├── TP_SOCKET_SERVER.pro    # Ton fichier projet serveur 
@@ -106,19 +106,6 @@ Pas de compte à créer. Pas d'email à donner. À chaque connexion, une nouvell
 
 ---
 
-## ★ Stack
-
-<div align="center">
-
-![C++](https://img.shields.io/badge/C++17-Langage_principal-00599C?style=for-the-badge&logo=c%2B%2B&logoColor=white)
-![Libsodium](https://img.shields.io/badge/Libsodium-Chiffrement_E2E-cc0000?style=for-the-badge&logo=letsencrypt&logoColor=white)
-![Boost Asio](https://img.shields.io/badge/Boost_Asio-Réseau_TCP-FF6600?style=for-the-badge&logoColor=white)
-![Qt](https://img.shields.io/badge/Qt_Creator-Interface-41CD52?style=for-the-badge&logo=qt&logoColor=white)
-
-</div>
-
----
-
 ## ★ Comment ça marche
 
 ```
@@ -133,10 +120,6 @@ Pas de compte à créer. Pas d'email à donner. À chaque connexion, une nouvell
      │         [ serveur TCP ]           │
      │    transmet. ne lit pas. oublie.  │
 ```
-
----
-
-
 ---
 
 ## ★ Contribuer
@@ -147,24 +130,9 @@ Toute contribution qui renforce la **confidentialité** ou la **sobriété du co
 **Ce projet est sérieux. Les issues aussi. Les trolls beaucoup moins.**
 
 ---
-
-## ★ Stats
-
 <div align="center">
 
-![Stars](https://img.shields.io/github/stars/ton-pseudo/SovLink?style=for-the-badge&color=cc0000&logo=github)
-![Forks](https://img.shields.io/github/forks/ton-pseudo/SovLink?style=for-the-badge&color=cc0000&logo=github)
-![Issues](https://img.shields.io/github/issues/ton-pseudo/SovLink?style=for-the-badge&color=cc0000&logo=github)
-
-</div>
-
----
-
-<div align="center">
-
-```
 ★  ★  ★
-```
 
 *SovLink — Groupe 3*
 **Ce qui a été dit ici ne sera plus demain.**
