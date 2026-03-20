@@ -1,8 +1,8 @@
 <div align="center">
 
-<img src="media/Logo_projet2.gif" width="160" alt="SovLink"/>
+<img src="Image/sovlink_spin.gif" width="160" alt="SovLink"/>
 
-<img src="https://readme-typing-svg.demolab.com?font=Share+Tech+Mono&size=38&duration=2800&pause=1200&color=CC0000&background=00000000&center=true&vCenter=true&width=620&height=65&lines=BIG+BROTHER WILL NOT WATCHING YOU !;0+historique" alt="SovLink typing"/>
+<img src="https://readme-typing-svg.demolab.com?font=Share+Tech+Mono&size=38&duration=2800&pause=1200&color=CC0000&background=00000000&center=true&vCenter=true&width=620&height=65&lines=SOVLINK;CHIFFRÉ.+ÉPHÉMÈRE.+ANONYME;TU+PARLES.+ON+N'ÉCOUTE+PAS;0+COMPTE.+0+HISTORIQUE.+0+TRACE" alt="SovLink typing"/>
 
 <br/>
 
@@ -10,14 +10,11 @@
 ![Langage](https://img.shields.io/badge/C%2B%2B-17-00599C?style=for-the-badge&logo=c%2B%2B&logoColor=white)
 ![Chiffrement](https://img.shields.io/badge/LIBSODIUM-CHIFFRÉ-cc0000?style=for-the-badge&logo=letsencrypt&logoColor=white)
 
-<br/><br/>
+<br/>
 
 ```
-╔══════════════════════════════════════════════════════╗
-║  Vos messages ne regardent que vous.                 ║
-║  Pas de serveur qui stocke. Pas d'œil qui surveille. ║
-║  Juste deux personnes. Juste des mots. Puis rien.    ║
-╚══════════════════════════════════════════════════════╝
+  Big Brother vous regarde.
+  SovLink, non.
 ```
 
 </div>
@@ -70,24 +67,40 @@ Pas de compte à créer. Pas d'email à donner. À chaque connexion, une nouvell
 ## ★ Arborescence
 
 ```
-SovLink/
+/PROJET_SOCKET_CHIFRE
+
 │
-├── 🖥️  server.cpp          ← cœur TCP, gestion des connexions
-├── 📡  client.cpp          ← interface réseau côté utilisateur
-├── 🔐  crypto.cpp          ← chiffrement Libsodium
+
+├── /TP_SOCKET_SERVER
+
+│   ├── TP_SOCKET_SERVER.pro    # Ton fichier projet serveur 
+
+│   ├── main.cpp                # Instancie le serveur 
+
+│   ├── server.h                # Déclaration de la classe MyServer 
+
+│   ├── server.cpp              # Logique de routage par clé publique 
+
+│   └── protocol.h              # Structure commune des paquets (Shared)
+
 │
-├── 📁 include/
-│   ├── sovlink.hpp
-│   └── crypto.hpp
+
+├── /TP_SOCKET_CLIENT
+
+│   ├── TP_SOCKET_CLIENT.pro    # Ton fichier projet client 
+
+│   ├── main.cpp                # Boucle d'interaction utilisateur 
+
+│   ├── client.h                # Déclaration de la classe MyClient 
+
+│   ├── client.cpp              # Gestion des clés et du chiffrement 
+
+│   └── protocol.h              # Copie du fichier de structure (doit être identique)
+
 │
-├── 📁 ui/                  ← interfaces Qt Designer
-│   ├── mainwindow.ui
-│   └── chat.ui
-│
-├── 📁 Image/
-│   └── sovlink_spin.gif
-│
-└── 📖 README.md
+
+└── /libs                       # (Optionnel) Si tu inclus libsodium en local
+ 
 ```
 
 ---
