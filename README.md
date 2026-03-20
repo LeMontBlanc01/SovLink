@@ -135,11 +135,6 @@ Pas de compte à créer. Pas d'email à donner. À chaque connexion, une nouvell
 
 ---
 
-## ★ Lancer le projet
-
-```bash
-# pas encore prêt — repassez plus tard ★
-```
 
 ---
 
