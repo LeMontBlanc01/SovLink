@@ -139,15 +139,6 @@ Toute contribution qui renforce la **confidentialité** ou la **sobriété du co
 
 ---
 
-## ★ Stats
-
-<div align="center">
-
-![Stars](https://img.shields.io/github/stars/ton-pseudo/SovLink?style=for-the-badge&color=cc0000&logo=github)
-![Forks](https://img.shields.io/github/forks/ton-pseudo/SovLink?style=for-the-badge&color=cc0000&logo=github)
-![Issues](https://img.shields.io/github/issues/ton-pseudo/SovLink?style=for-the-badge&color=cc0000&logo=github)
-
-</div>
 
 ---
 
