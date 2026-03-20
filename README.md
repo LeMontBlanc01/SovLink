@@ -36,7 +36,7 @@ Pas de compte à créer. Pas d'email à donner. À chaque connexion, une nouvell
 
 ## ★ Pourquoi ça existe
 
-| ✦ | Objectif |
+| ✦ | Fonctionnalitées |
 |:---:|:---|
 | 🔐 | Chiffrement asymétrique de bout en bout — seul le destinataire lit |
 | 👤 | Anonymat structurel : nouvelle identité à chaque session |
