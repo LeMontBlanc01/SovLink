@@ -35,7 +35,7 @@ void Client::onConnected() {
 
         // On envoie notre "nom" ou "clé publique" pour que le serveur nous enregistre
         QDataStream out(m_socket);
-        QString monID = "Session_User_" + QString::number(qrand() % 1000);
+        QString monID = "Session_User_" + QString::number(QRandomGenerator::global()->generate());
         out << monID;
 
         qDebug() << "Enregistre sur le serveur en tant que :" << monID;

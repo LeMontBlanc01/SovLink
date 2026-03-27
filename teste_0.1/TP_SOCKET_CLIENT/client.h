@@ -8,6 +8,7 @@
 #include <QUdpSocket>
 #include <QHostAddress>
 #include <QTimer>
+#include <QRandomGenerator>
 
 class Client : public QObject {
     Q_OBJECT
