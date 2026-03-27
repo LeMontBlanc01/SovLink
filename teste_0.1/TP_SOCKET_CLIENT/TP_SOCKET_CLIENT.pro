@@ -20,3 +20,6 @@ SOURCES += main.cpp \
 
 HEADERS += \
     client.h
+
+INCLUDEPATH += C:/Documents/GitHub/SovLink/libsodium/include
+LIBS += -LC:/Documents/GitHub/SovLink/libsodium/x64/Release/v142/dynamic -lsodium
