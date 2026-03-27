@@ -8,13 +8,24 @@ int main(int argc, char *argv[]) {
 
     Client monClient;
 
-    // On utilise un timer pour vérifier régulièrement si l'utilisateur a tapé un message
-    // sans figer la réception des messages réseau
+    if (argc > 1) {
+        monClient.connectToServer(QString::fromLocal8Bit(argv[1]));
+    } else {
+        // Forcer l'affichage avant la saisie
+        fprintf(stdout, "IP du serveur (laisser vide pour decouverte auto) : ");
+        fflush(stdout);
+
+        char buf[256] = {};
+        fgets(buf, sizeof(buf), stdin);
+        QString ip = QString::fromLocal8Bit(buf).trimmed();
+
+        if (!ip.isEmpty()) {
+            monClient.connectToServer(ip);
+        }
+    }
+
     QTimer timer;
     QObject::connect(&timer, &QTimer::timeout, [&](){
-        // On vérifie si des données sont prêtes sur l'entrée standard (clavier)
-        // Note: Cette partie simplifiée fonctionne mieux sous Linux/macOS.
-        // Sous Windows, la lecture console bloquante est plus complexe.
         monClient.messageManualInput();
     });
     timer.start(100);

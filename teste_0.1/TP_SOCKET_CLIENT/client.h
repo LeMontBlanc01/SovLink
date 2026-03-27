@@ -16,6 +16,7 @@ class Client : public QObject {
 public:
     explicit Client(QObject *parent = nullptr);
     void messageManualInput(); // Pour lire la console
+    void connectToServer(const QString& ip);
 
 private slots:
     void onConnected();

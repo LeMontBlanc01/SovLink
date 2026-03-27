@@ -31,15 +31,34 @@ Client::Client(QObject *parent) : QObject(parent) {
 }
 
 void Client::onConnected() {
-        qDebug() << "Connexion TCP etablie avec le serveur !";
+    qDebug() << "Connexion TCP etablie !";
 
-        // On envoie notre "nom" ou "clé publique" pour que le serveur nous enregistre
-        QDataStream out(m_socket);
-        QString monID = "Session_User_" + QString::number(QRandomGenerator::global()->generate());
-        out << monID;
+    // Demande à l'utilisateur son pseudo
+    fprintf(stdout, "Entrez votre pseudo : ");
+    fflush(stdout);
+    char buf[256] = {};
+    fgets(buf, sizeof(buf), stdin);
+    m_myPubKey = QString::fromLocal8Bit(buf).trimmed();
 
-        qDebug() << "Enregistre sur le serveur en tant que :" << monID;
-    }
+    // Demande la cible
+    fprintf(stdout, "Pseudo du destinataire : ");
+    fflush(stdout);
+    char buf2[256] = {};
+    fgets(buf2, sizeof(buf2), stdin);
+    m_targetPubKey = QString::fromLocal8Bit(buf2).trimmed();
+
+    // Envoie la clé au serveur
+    QDataStream out(m_socket);
+    out.setVersion(QDataStream::Qt_5_0);
+    out << m_myPubKey;
+
+    qDebug() << "Enregistre comme :" << m_myPubKey << "-> cible :" << m_targetPubKey;
+}
+
+void Client::connectToServer(const QString& ip) {
+    m_udpListener->close();
+    m_socket->connectToHost(QHostAddress(ip), 8080);
+}
 
 
 void Client::onReadyRead() {

@@ -28,6 +28,8 @@ void Server::connexionClient() {
     qDebug() << "Nouveau client connecte. En attente d'enregistrement...";
 }
 
+
+
 void Server::lireTexte() {
     QTcpSocket *socket = qobject_cast<QTcpSocket*>(sender());
     if (!socket) return;
