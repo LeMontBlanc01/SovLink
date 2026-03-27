@@ -8,6 +8,7 @@
 #include <QDataStream>
 #include <QUdpSocket>
 #include <QTimer>
+#include <QSet>
 
 // Les classes forward-declared
 class QNetworkSession;
@@ -28,6 +29,7 @@ private:
     // MODIFICATION : On n'envoie plus à "un" client, mais à un client spécifique via sa clé
     void envoiTexte(QTcpSocket* destinataire, const QByteArray& data);
 
+
 private:
     QTcpServer *m_tcp_server;
 
@@ -37,7 +39,7 @@ private:
     // Clé (QString) : La clé publique (pseudo)
     // Valeur (QTcpSocket*) : Le lien vers le socket réel
     QMap<QString, QTcpSocket*> m_clients;
-
+    QSet<QTcpSocket*> m_pendingSockets;
     // 2. Pour le protocole de lecture (évite de couper les messages)
     quint16 m_blockSize;
 
@@ -45,6 +47,7 @@ private:
     QNetworkSession *m_network_session;
     QUdpSocket *m_udpBeacon;
     QTimer *m_beaconTimer;
+
 };
 
 #endif
