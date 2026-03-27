@@ -16,10 +16,10 @@ CXX           = g++
 DEFINES       = -DUNICODE -D_UNICODE -DWIN32 -DMINGW_HAS_SECURE_API=1 -DQT_QML_DEBUG -DQT_NETWORK_LIB -DQT_CORE_LIB
 CFLAGS        = -fno-keep-inline-dllexport -g -Wall -Wextra -Wextra $(DEFINES)
 CXXFLAGS      = -fno-keep-inline-dllexport -g -Wall -Wextra -Wextra -fexceptions -mthreads $(DEFINES)
-INCPATH       = -I../../../TP_SOCKET_CLIENT -I. -IC:/Documents/GitHub/SovLink/libsodium/include -IC:/Qt/6.9.1/mingw_64/include -IC:/Qt/6.9.1/mingw_64/include/QtNetwork -IC:/Qt/6.9.1/mingw_64/include/QtCore -Idebug -IC:/Qt/6.9.1/mingw_64/mkspecs/win32-g++ 
+INCPATH       = -I../../../TP_SOCKET_CLIENT -I. -I../../../../libsodium-win64/include -IC:/Qt/6.9.1/mingw_64/include -IC:/Qt/6.9.1/mingw_64/include/QtNetwork -IC:/Qt/6.9.1/mingw_64/include/QtCore -Idebug -IC:/Qt/6.9.1/mingw_64/mkspecs/win32-g++ 
 LINKER      =        g++
 LFLAGS        =        -Wl,-subsystem,console -mthreads
-LIBS        =        -LC:\Documents\GitHub\SovLink\libsodium\x64\Release\v142\dynamic -lsodium C:\Qt\6.9.1\mingw_64\lib\libQt6Network.a C:\Qt\6.9.1\mingw_64\lib\libQt6Core.a   
+LIBS        =        -LC:\Users\elric.evrard\Documents\GitHub\SovLink\libsodium-win64\lib -lsodium C:\Qt\6.9.1\mingw_64\lib\libQt6Network.a C:\Qt\6.9.1\mingw_64\lib\libQt6Core.a   
 QMAKE         = C:\Qt\6.9.1\mingw_64\bin\qmake.exe
 DEL_FILE      = del
 CHK_DIR_EXISTS= if not exist
@@ -254,7 +254,7 @@ debug/moc_client.cpp: ../../client.h \
 		C:/Qt/6.9.1/mingw_64/include/QtCore/qrandom.h \
 		debug/moc_predefs.h \
 		C:/Qt/6.9.1/mingw_64/bin/moc.exe
-	C:\Qt\6.9.1\mingw_64\bin\moc.exe $(DEFINES) --include C:/Users/elric.evrard/Documents/GitHub/SovLink/teste_0.1/TP_SOCKET_CLIENT/build/Desktop_Qt_6_9_1_MinGW_64_bit-Debug/debug/moc_predefs.h -IC:/Qt/6.9.1/mingw_64/mkspecs/win32-g++ -IC:/Users/elric.evrard/Documents/GitHub/SovLink/teste_0.1/TP_SOCKET_CLIENT -IC:/Documents/GitHub/SovLink/libsodium/include -IC:/Qt/6.9.1/mingw_64/include -IC:/Qt/6.9.1/mingw_64/include/QtNetwork -IC:/Qt/6.9.1/mingw_64/include/QtCore -I. -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++ -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/backward -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include-fixed -IC:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include ..\..\client.h -o debug\moc_client.cpp
+	C:\Qt\6.9.1\mingw_64\bin\moc.exe $(DEFINES) --include C:/Users/elric.evrard/Documents/GitHub/SovLink/teste_0.1/TP_SOCKET_CLIENT/build/Desktop_Qt_6_9_1_MinGW_64_bit-Debug/debug/moc_predefs.h -IC:/Qt/6.9.1/mingw_64/mkspecs/win32-g++ -IC:/Users/elric.evrard/Documents/GitHub/SovLink/teste_0.1/TP_SOCKET_CLIENT -IC:/Users/elric.evrard/Documents/GitHub/SovLink/libsodium-win64/include -IC:/Qt/6.9.1/mingw_64/include -IC:/Qt/6.9.1/mingw_64/include/QtNetwork -IC:/Qt/6.9.1/mingw_64/include/QtCore -I. -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++ -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/backward -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include-fixed -IC:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include ..\..\client.h -o debug\moc_client.cpp
 
 compiler_moc_objc_header_make_all:
 compiler_moc_objc_header_clean:
@@ -430,7 +430,79 @@ debug/main.o: ../../main.cpp C:/Qt/6.9.1/mingw_64/include/QtCore/QCoreApplicatio
 		C:/Qt/6.9.1/mingw_64/include/QtCore/QTimer \
 		C:/Qt/6.9.1/mingw_64/include/QtCore/qtimer.h \
 		C:/Qt/6.9.1/mingw_64/include/QtCore/QRandomGenerator \
-		C:/Qt/6.9.1/mingw_64/include/QtCore/qrandom.h
+		C:/Qt/6.9.1/mingw_64/include/QtCore/qrandom.h \
+		../../../../libsodium-win64/include/sodium.h \
+		../../../../libsodium-win64/include/sodium/version.h \
+		../../../../libsodium-win64/include/sodium/export.h \
+		../../../../libsodium-win64/include/sodium/core.h \
+		../../../../libsodium-win64/include/sodium/crypto_aead_aegis128l.h \
+		../../../../libsodium-win64/include/sodium/crypto_aead_aegis256.h \
+		../../../../libsodium-win64/include/sodium/crypto_aead_aes256gcm.h \
+		../../../../libsodium-win64/include/sodium/crypto_aead_chacha20poly1305.h \
+		../../../../libsodium-win64/include/sodium/crypto_aead_xchacha20poly1305.h \
+		../../../../libsodium-win64/include/sodium/crypto_auth.h \
+		../../../../libsodium-win64/include/sodium/crypto_auth_hmacsha512256.h \
+		../../../../libsodium-win64/include/sodium/crypto_auth_hmacsha512.h \
+		../../../../libsodium-win64/include/sodium/crypto_hash_sha512.h \
+		../../../../libsodium-win64/include/sodium/crypto_auth_hmacsha256.h \
+		../../../../libsodium-win64/include/sodium/crypto_hash_sha256.h \
+		../../../../libsodium-win64/include/sodium/crypto_box.h \
+		../../../../libsodium-win64/include/sodium/crypto_box_curve25519xsalsa20poly1305.h \
+		../../../../libsodium-win64/include/sodium/crypto_stream_xsalsa20.h \
+		../../../../libsodium-win64/include/sodium/crypto_core_hchacha20.h \
+		../../../../libsodium-win64/include/sodium/crypto_core_hsalsa20.h \
+		../../../../libsodium-win64/include/sodium/crypto_core_keccak1600.h \
+		../../../../libsodium-win64/include/sodium/crypto_core_salsa20.h \
+		../../../../libsodium-win64/include/sodium/crypto_core_salsa2012.h \
+		../../../../libsodium-win64/include/sodium/crypto_core_salsa208.h \
+		../../../../libsodium-win64/include/sodium/crypto_generichash.h \
+		../../../../libsodium-win64/include/sodium/crypto_generichash_blake2b.h \
+		../../../../libsodium-win64/include/sodium/crypto_hash.h \
+		../../../../libsodium-win64/include/sodium/crypto_ipcrypt.h \
+		../../../../libsodium-win64/include/sodium/crypto_kdf.h \
+		../../../../libsodium-win64/include/sodium/crypto_kdf_blake2b.h \
+		../../../../libsodium-win64/include/sodium/crypto_kdf_hkdf_sha256.h \
+		../../../../libsodium-win64/include/sodium/crypto_kdf_hkdf_sha512.h \
+		../../../../libsodium-win64/include/sodium/crypto_kx.h \
+		../../../../libsodium-win64/include/sodium/crypto_onetimeauth.h \
+		../../../../libsodium-win64/include/sodium/crypto_onetimeauth_poly1305.h \
+		../../../../libsodium-win64/include/sodium/crypto_pwhash.h \
+		../../../../libsodium-win64/include/sodium/crypto_pwhash_argon2i.h \
+		../../../../libsodium-win64/include/sodium/crypto_pwhash_argon2id.h \
+		../../../../libsodium-win64/include/sodium/crypto_scalarmult.h \
+		../../../../libsodium-win64/include/sodium/crypto_scalarmult_curve25519.h \
+		../../../../libsodium-win64/include/sodium/crypto_secretbox.h \
+		../../../../libsodium-win64/include/sodium/crypto_secretbox_xsalsa20poly1305.h \
+		../../../../libsodium-win64/include/sodium/crypto_secretstream_xchacha20poly1305.h \
+		../../../../libsodium-win64/include/sodium/crypto_stream_chacha20.h \
+		../../../../libsodium-win64/include/sodium/crypto_shorthash.h \
+		../../../../libsodium-win64/include/sodium/crypto_shorthash_siphash24.h \
+		../../../../libsodium-win64/include/sodium/crypto_sign.h \
+		../../../../libsodium-win64/include/sodium/crypto_sign_ed25519.h \
+		../../../../libsodium-win64/include/sodium/crypto_stream.h \
+		../../../../libsodium-win64/include/sodium/crypto_stream_salsa20.h \
+		../../../../libsodium-win64/include/sodium/crypto_verify_16.h \
+		../../../../libsodium-win64/include/sodium/crypto_verify_32.h \
+		../../../../libsodium-win64/include/sodium/crypto_verify_64.h \
+		../../../../libsodium-win64/include/sodium/crypto_xof_shake128.h \
+		../../../../libsodium-win64/include/sodium/crypto_xof_shake256.h \
+		../../../../libsodium-win64/include/sodium/crypto_xof_turboshake128.h \
+		../../../../libsodium-win64/include/sodium/crypto_xof_turboshake256.h \
+		../../../../libsodium-win64/include/sodium/randombytes.h \
+		../../../../libsodium-win64/include/sodium/randombytes_internal_random.h \
+		../../../../libsodium-win64/include/sodium/randombytes_sysrandom.h \
+		../../../../libsodium-win64/include/sodium/runtime.h \
+		../../../../libsodium-win64/include/sodium/utils.h \
+		../../../../libsodium-win64/include/sodium/crypto_box_curve25519xchacha20poly1305.h \
+		../../../../libsodium-win64/include/sodium/crypto_stream_xchacha20.h \
+		../../../../libsodium-win64/include/sodium/crypto_core_ed25519.h \
+		../../../../libsodium-win64/include/sodium/crypto_core_ristretto255.h \
+		../../../../libsodium-win64/include/sodium/crypto_pwhash_scryptsalsa208sha256.h \
+		../../../../libsodium-win64/include/sodium/crypto_scalarmult_ed25519.h \
+		../../../../libsodium-win64/include/sodium/crypto_scalarmult_ristretto255.h \
+		../../../../libsodium-win64/include/sodium/crypto_secretbox_xchacha20poly1305.h \
+		../../../../libsodium-win64/include/sodium/crypto_stream_salsa2012.h \
+		../../../../libsodium-win64/include/sodium/crypto_stream_salsa208.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\main.o ..\..\main.cpp
 
 debug/client.o: ../../client.cpp ../../client.h \
