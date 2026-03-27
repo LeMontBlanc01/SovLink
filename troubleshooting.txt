@@ -1,0 +1,2 @@
+faille de sécurité (obligation de rentrer l'ip du serveur risque de ddos, ip a encoder ig)
+Message entre utilisateur complétement bugger (mais plus de problème serveur)
