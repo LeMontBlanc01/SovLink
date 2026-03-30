@@ -32,9 +32,11 @@ public:
     void connectToServer(const QString& ip);
     void sendMessage(const QString& text, int ttlSeconds = -1);
     void messageManualInput();
+    void setTargetKey(const QString& key);
 
     QString publicKey()  const { return m_myPubKey;  }
     QString privateKey() const { return m_myPrivKey; }
+
 
 signals:
     void messageReceived(const QString& text, int ttlSeconds);

@@ -114,16 +114,14 @@ void Client::connectToServer(const QString& ip) {
     m_socket->connectToHost(QHostAddress(ip), 8080);
 }
 
+void Client::setTargetKey(const QString& key) {
+    m_targetPubKey = key;
+}
+
 void Client::onConnected() {
     qDebug() << "Connexion etablie !";
 
-    fprintf(stdout, "\nClé publique du destinataire : ");
-    fflush(stdout);
-    char buf[512] = {};
-    fgets(buf, sizeof(buf), stdin);
-    m_targetPubKey = QString::fromLocal8Bit(buf).trimmed();
-
-    // Envoi clé avec préfixe de taille
+    // Plus de fgets ici — la clé est déjà définie
     QByteArray paquet;
     QDataStream out(&paquet, QIODevice::WriteOnly);
     out.setVersion(QDataStream::Qt_5_0);
@@ -134,6 +132,10 @@ void Client::onConnected() {
 
     m_socket->write(paquet);
     m_registered = true;
+
+    qDebug() << "Enregistre. Cible :" << m_targetPubKey.left(20) << "...";
+    qDebug() << "Vous pouvez ecrire vos messages.";
+    qDebug() << "Format TTL : [ttl=30] message";
 }
 
 QByteArray Client::encrypt(const QByteArray& data, const QString& pubKey) {
