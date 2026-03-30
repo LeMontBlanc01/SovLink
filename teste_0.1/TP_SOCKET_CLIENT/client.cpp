@@ -62,13 +62,13 @@ void Client::connectToServer(const QString& ip) {
 
 
 void Client::onReadyRead() {
-    QDataStream in(m_socket);
-    QByteArray messageData;
+    // On lit TOUT ce qui est disponible sur le socket d'un coup
+    QByteArray messageData = m_socket->readAll();
 
-    // On lit le message relayé par le serveur
-    in >> messageData;
-    qDebug() << "\n[Message reçu] :" << QString::fromUtf8(messageData);
-    qDebug() << "Votre réponse :";
+    if (!messageData.isEmpty()) {
+        qDebug() << "\n[Message reçu] :" << QString::fromUtf8(messageData);
+        qDebug() << "Votre réponse : ";
+    }
 }
 
 // Cette fonction doit être appelée dans le main.cpp pour permettre la saisie
