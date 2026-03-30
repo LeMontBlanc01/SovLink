@@ -28,14 +28,13 @@ class Client : public QObject {
     Q_OBJECT
 
 public:
-    explicit Client(QObject *parent = nullptr);
-    void connectToServer(const QString& ip);
-    void sendMessage(const QString& text, int ttlSeconds = -1);
-    void messageManualInput();
-    void setTargetKey(const QString& key);
-
     QString publicKey()  const { return m_myPubKey;  }
     QString privateKey() const { return m_myPrivKey; }
+    explicit Client(QObject *parent = nullptr);
+    void connectToServer(const QString& ip);
+    void setTargetKey(const QString& key);
+    void sendMessage(const QString& text, int ttlSeconds = -1);
+    // messageManualInput() → supprimé, plus besoin
 
 
 signals:

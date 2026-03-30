@@ -1,5 +1,5 @@
 #include <QCoreApplication>
-#include "client.h"
+#include "client_test.h"
 #include "inputreader.h"
 
 int main(int argc, char *argv[]) {
