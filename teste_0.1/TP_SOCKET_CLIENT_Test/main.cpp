@@ -1,45 +1,56 @@
 #include <QCoreApplication>
-#include "client_test.h"
-#include <QTimer>
+#include "client.h"
+#include "inputreader.h"
 
 int main(int argc, char *argv[]) {
     QCoreApplication a(argc, argv);
 
-    fprintf(stdout, "=== SovLink Client ===\n");
-
-    // 1. On cree le client → la paire de cles est generee dans le constructeur
+    // 1. Création du client → génère les clés
     Client monClient;
 
-    // 2. On affiche la cle publique MAINTENANT pour que l'utilisateur puisse la partager
-    fprintf(stdout, "\nVotre cle publique (partagez-la avec votre contact) :\n");
-    fprintf(stdout, "%s\n", monClient.publicKey().toUtf8().constData());
-    fprintf(stdout, "------------------------------------------------------\n");
-    fprintf(stdout, "Appuyez sur ENTREE quand l'autre a votre cle...\n");
+    // 2. Affiche la clé publique
+    fprintf(stdout, "\n=== SovLink ===\n");
+    fprintf(stdout, "Votre cle publique :\n%s\n", monClient.publicKey().toUtf8().constData());
+    fprintf(stdout, "---\nAppuyez sur ENTREE quand pret...\n");
     fflush(stdout);
-    getchar(); // attend que l'utilisateur soit pret
+    getchar();
 
-    // 3. Saisie de l'IP et de la cle du destinataire
+    // 3. IP du serveur
     fprintf(stdout, "IP du serveur : ");
     fflush(stdout);
     char ipBuf[256] = {};
     fgets(ipBuf, sizeof(ipBuf), stdin);
     QString serverIp = QString::fromLocal8Bit(ipBuf).trimmed();
 
+    // 4. Clé du destinataire
     fprintf(stdout, "Cle publique du destinataire : ");
     fflush(stdout);
     char keyBuf[512] = {};
     fgets(keyBuf, sizeof(keyBuf), stdin);
     QString targetKey = QString::fromLocal8Bit(keyBuf).trimmed();
 
-    // 4. On configure et on connecte
+    // 5. Connexion
     monClient.setTargetKey(targetKey);
     monClient.connectToServer(serverIp);
 
-    QTimer inputTimer;
-    QObject::connect(&inputTimer, &QTimer::timeout, [&](){
-        monClient.messageManualInput();
+    // 6. Thread dédié pour lire stdin sans bloquer Qt
+    InputReader reader;
+    QObject::connect(&reader, &InputReader::lineRead, [&](const QString& line) {
+        int ttl = -1;
+        QString message = line;
+
+        if (line.startsWith("[ttl=", Qt::CaseInsensitive)) {
+            int end = line.indexOf(']');
+            if (end > 0) {
+                ttl     = line.mid(5, end - 5).toInt();
+                message = line.mid(end + 1).trimmed();
+            }
+        }
+
+        if (!message.isEmpty())
+            monClient.sendMessage(message, ttl);
     });
-    inputTimer.start(500);
+    reader.start();
 
     return a.exec();
 }

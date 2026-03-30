@@ -19,5 +19,6 @@ SOURCES += main.cpp \
     client_test.cpp
 
 HEADERS += \
-    client_test.h
+    client_test.h \
+    inputreader.h
 
