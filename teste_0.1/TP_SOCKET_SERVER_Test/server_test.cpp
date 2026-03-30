@@ -2,7 +2,7 @@
 #include <QDataStream>
 #include <QDebug>
 
-Server::Server() : m_blockSize(0) {
+Server::Server() {
     m_tcp_server = new QTcpServer(this);
 
     if (!m_tcp_server->listen(QHostAddress::Any, 8080)) {
@@ -40,15 +40,13 @@ void Server::lireTexte() {
 
     while (socket->bytesAvailable() > 0) {
 
-        // Lit le préfixe de taille
-        if (m_blockSize == 0) {
+        if (m_blockSizes[socket] == 0) {
             if (socket->bytesAvailable() < (int)sizeof(quint32)) return;
-            in >> m_blockSize;
+            in >> m_blockSizes[socket];
         }
 
-        // Attend que le message complet soit arrivé
-        if (socket->bytesAvailable() < m_blockSize) return;
-        m_blockSize = 0; // reset pour le prochain message
+        if (socket->bytesAvailable() < m_blockSizes[socket]) return;
+        m_blockSizes[socket] = 0;
 
         if (m_pendingSockets.contains(socket)) {
             QString clePublique;
@@ -58,7 +56,8 @@ void Server::lireTexte() {
                 m_pendingSockets.remove(socket);
                 qDebug() << "[✓] Client enregistré :" << clePublique.left(20);
             }
-            return;
+            // FIX 2 : pas de return ici, on continue la boucle
+            continue;
         }
 
         QString    cleDestinataire;
@@ -95,6 +94,7 @@ void Server::clientDeconnecte() {
     if (!socket) return;
 
     m_pendingSockets.remove(socket);
+    m_blockSizes.remove(socket);
     QString cle = m_clients.key(socket);
     if (!cle.isEmpty()) {
         m_clients.remove(cle);
