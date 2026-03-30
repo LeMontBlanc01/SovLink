@@ -23,7 +23,6 @@ int main(int argc, char *argv[]) {
     Client monClient;
     monClient.setTargetKey(targetKey);
     monClient.connectToServer(serverIp);
-    monClient.generateKeyPair();
     QTimer inputTimer;
     QObject::connect(&inputTimer, &QTimer::timeout, [&](){
         monClient.messageManualInput();

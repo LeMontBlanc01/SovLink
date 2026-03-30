@@ -21,10 +21,10 @@ SOURCES += main.cpp \
 HEADERS += \
     client.h
 
-INCLUDEPATH += C:\Users\jean.chevrier\Documents\GitHub\SovLink\libsodium-win64\include
-LIBS        += -LC:\Users\jean.chevrier\Documents\GitHub\SovLink\libsodium-win64\lib -lsodium
+INCLUDEPATH += C:\Users\elric.evrard\Documents\GitHub\SovLink\libsodium-win64\include
+LIBS        += -LC:\Users\elric.evrard\Documents\GitHub\SovLink\libsodium-win64\lib -lsodium
 LIBS += -lws2_32
 win32 {
-    SODIUM_DLL = C:\Users\jean.chevrier\Documents\GitHub\SovLink\libsodium-win64\bin\libsodium.dll
+    SODIUM_DLL = C:\Users\elric.evrard\Documents\GitHub\SovLink\libsodium-win64\bin\libsodium.dll
     QMAKE_POST_LINK += copy /Y \"$$SODIUM_DLL\" \"$$OUT_PWD\"
 }
