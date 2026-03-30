@@ -31,7 +31,7 @@ private:
     QTcpServer       *m_tcp_server;
     QMap<QString, QTcpSocket*> m_clients;   // clePublique -> socket
     QSet<QTcpSocket*>          m_pendingSockets;
-    quint16           m_blockSize;
+    QMap<QTcpSocket*, quint16> m_blockSizes;
     QNetworkSession  *m_network_session = nullptr;
     QUdpSocket       *m_udpBeacon;
     QTimer           *m_beaconTimer;
