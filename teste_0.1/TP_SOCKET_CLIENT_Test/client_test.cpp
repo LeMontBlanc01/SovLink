@@ -117,25 +117,23 @@ void Client::connectToServer(const QString& ip) {
 void Client::onConnected() {
     qDebug() << "Connexion etablie !";
 
-    // Demande la clé publique du destinataire
     fprintf(stdout, "\nClé publique du destinataire : ");
     fflush(stdout);
     char buf[512] = {};
     fgets(buf, sizeof(buf), stdin);
     m_targetPubKey = QString::fromLocal8Bit(buf).trimmed();
 
-    // Enregistrement sur le serveur avec notre clé publique
-    QDataStream out(m_socket);
+    // Envoi clé avec préfixe de taille
+    QByteArray paquet;
+    QDataStream out(&paquet, QIODevice::WriteOnly);
     out.setVersion(QDataStream::Qt_5_0);
+    out << quint32(0);
     out << m_myPubKey;
+    out.device()->seek(0);
+    out << quint32(paquet.size() - sizeof(quint32));
 
+    m_socket->write(paquet);
     m_registered = true;
-    qDebug() << "Enregistré. Cible :" << m_targetPubKey.left(20) << "...";
-    qDebug() << "Vous pouvez maintenant envoyer des messages.";
-    qDebug() << "Format: [ttl=X] message  (ex: [ttl=30] Salut!  ->  disparaît après 30s)";
-    qDebug() << "        message seul      (ex: Bonjour!        ->  permanent)";
-
-    emit connected();
 }
 
 QByteArray Client::encrypt(const QByteArray& data, const QString& pubKey) {
@@ -153,16 +151,19 @@ QByteArray Client::decrypt(const QByteArray& data) {
 void Client::sendMessage(const QString& text, int ttlSeconds) {
     if (!m_socket->isOpen() || m_targetPubKey.isEmpty()) return;
 
-    // On encode le message avec le TTL : "TTL:30|texte du message"
     QString payload = QString("TTL:%1|%2").arg(ttlSeconds).arg(text);
-    QByteArray raw  = payload.toUtf8();
+    QByteArray chiffre = encrypt(payload.toUtf8(), m_targetPubKey);
 
-    // Chiffrement avec la clé publique du destinataire
-    QByteArray chiffre = encrypt(raw, m_targetPubKey);
-
-    QDataStream out(m_socket);
+    QByteArray paquet;
+    QDataStream out(&paquet, QIODevice::WriteOnly);
     out.setVersion(QDataStream::Qt_5_0);
+
+    out << quint32(0);                      // placeholder
     out << m_targetPubKey << chiffre;
+    out.device()->seek(0);
+    out << quint32(paquet.size() - sizeof(quint32)); // vraie taille
+
+    m_socket->write(paquet);
 }
 
 void Client::messageManualInput() {
@@ -193,48 +194,44 @@ void Client::messageManualInput() {
 void Client::onReadyRead() {
     QDataStream in(m_socket);
     in.setVersion(QDataStream::Qt_5_0);
-    QByteArray payload;
-    in >> payload;
 
-    // Déchiffrement
-    QByteArray dechiffre = decrypt(payload);
-    QString contenu = QString::fromUtf8(dechiffre);
+    while (m_socket->bytesAvailable() > 0) {
 
-    // Erreur serveur ?
-    if (contenu.startsWith("__ERROR__:")) {
-        qDebug() << "[!] Erreur serveur :" << contenu.mid(10);
-        return;
-    }
+        if (m_blockSize == 0) {
+            if (m_socket->bytesAvailable() < (int)sizeof(quint32)) return;
+            in >> m_blockSize;
+        }
 
-    // Parsing TTL|message
-    int ttl = -1;
-    QString texte = contenu;
+        if (m_socket->bytesAvailable() < m_blockSize) return;
+        m_blockSize = 0;
 
-    if (contenu.startsWith("TTL:")) {
-        int sep = contenu.indexOf('|');
-        if (sep > 0) {
-            ttl   = contenu.mid(4, sep - 4).toInt();
-            texte = contenu.mid(sep + 1);
+        QByteArray payload;
+        in >> payload;
+
+        QByteArray dechiffre = decrypt(payload);
+        QString contenu = QString::fromUtf8(dechiffre);
+
+        int ttl = -1;
+        QString texte = contenu;
+        if (contenu.startsWith("TTL:")) {
+            int sep = contenu.indexOf('|');
+            if (sep > 0) {
+                ttl   = contenu.mid(4, sep - 4).toInt();
+                texte = contenu.mid(sep + 1);
+            }
+        }
+
+        qDebug() << "\n[" << QDateTime::currentDateTime().toString("hh:mm:ss") << "] [Eux]" << texte;
+        if (ttl > 0) qDebug() << "  ⏱ disparaît dans" << ttl << "secondes";
+
+        emit messageReceived(texte, ttl);
+
+        if (ttl > 0) {
+            QTimer::singleShot(ttl * 1000, [texte]() {
+                qDebug() << "[🔥 Supprimé :" << texte.left(20) << "]";
+            });
         }
     }
-
-    QString affichage = texte;
-    if (ttl > 0) affichage += QString("  ⏱ (disparaît dans %1s)").arg(ttl);
-
-    qDebug() << "\n[" << QDateTime::currentDateTime().toString("hh:mm:ss") << "]"
-             << "[Eux]" << affichage;
-
-    emit messageReceived(texte, ttl);
-
-    // Auto-suppression
-    if (ttl > 0) {
-        QTimer::singleShot(ttl * 1000, [texte]() {
-            qDebug() << "[🔥 Message auto-supprimé :" << texte.left(20) << "...]";
-        });
-    }
-
-    fprintf(stdout, "> ");
-    fflush(stdout);
 }
 
 void Client::onDisconnected() {

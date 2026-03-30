@@ -65,6 +65,7 @@ private:
     QString      m_myPrivKey;
     QString      m_targetPubKey;
     bool         m_registered = false;
+    quint32  m_blockSize = 0;
 };
 
 #endif

@@ -40,20 +40,27 @@ void Server::lireTexte() {
 
     while (socket->bytesAvailable() > 0) {
 
-        // Pas encore enregistré → premier paquet = clé publique
+        // Lit le préfixe de taille
+        if (m_blockSize == 0) {
+            if (socket->bytesAvailable() < (int)sizeof(quint32)) return;
+            in >> m_blockSize;
+        }
+
+        // Attend que le message complet soit arrivé
+        if (socket->bytesAvailable() < m_blockSize) return;
+        m_blockSize = 0; // reset pour le prochain message
+
         if (m_pendingSockets.contains(socket)) {
             QString clePublique;
             in >> clePublique;
             if (!clePublique.isEmpty()) {
                 m_clients.insert(clePublique, socket);
                 m_pendingSockets.remove(socket);
-                qDebug() << "[✓] Client enregistré :" << clePublique.left(20) << "...";
-                qDebug() << "    Clients connectés :" << m_clients.size();
+                qDebug() << "[✓] Client enregistré :" << clePublique.left(20);
             }
             return;
         }
 
-        // Déjà enregistré → paquet = [destinataire | payload chiffré]
         QString    cleDestinataire;
         QByteArray payload;
         in >> cleDestinataire >> payload;
@@ -61,16 +68,10 @@ void Server::lireTexte() {
         if (cleDestinataire.isEmpty() || payload.isEmpty()) return;
 
         if (m_clients.contains(cleDestinataire)) {
-            qDebug() << "[→] Relais vers :" << cleDestinataire.left(20) << "...";
+            qDebug() << "[→] Relais vers :" << cleDestinataire.left(20);
             envoiTexte(m_clients.value(cleDestinataire), payload);
         } else {
-            qDebug() << "[!] Destinataire introuvable :" << cleDestinataire.left(20);
-            // On renvoie un message d'erreur à l'expéditeur
-            QByteArray erreur;
-            QDataStream errStream(&erreur, QIODevice::WriteOnly);
-            errStream.setVersion(QDataStream::Qt_5_0);
-            errStream << QByteArray("__ERROR__:DESTINATAIRE_INCONNU");
-            socket->write(erreur);
+            qDebug() << "[!] Destinataire introuvable";
         }
     }
 }
@@ -79,7 +80,13 @@ void Server::envoiTexte(QTcpSocket* dest, const QByteArray& data) {
     QByteArray paquet;
     QDataStream out(&paquet, QIODevice::WriteOnly);
     out.setVersion(QDataStream::Qt_5_0);
+
+    out << quint32(0);      // placeholder taille
     out << data;
+    // Écrit la vraie taille au début
+    out.device()->seek(0);
+    out << quint32(paquet.size() - sizeof(quint32));
+
     dest->write(paquet);
 }
 
