@@ -167,7 +167,7 @@ void Client::sendMessage(const QString& text, int ttlSeconds) {
 
     m_socket->write(paquet);
 }
-
+/*
 void Client::messageManualInput() {
     if (!m_registered) return;
 
@@ -192,7 +192,7 @@ void Client::messageManualInput() {
     if (!message.isEmpty())
         sendMessage(message, ttl);
 }
-
+*/
 void Client::onReadyRead() {
     QDataStream in(m_socket);
     in.setVersion(QDataStream::Qt_5_0);

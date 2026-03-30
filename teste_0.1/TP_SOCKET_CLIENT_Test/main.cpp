@@ -35,7 +35,8 @@ int main(int argc, char *argv[]) {
 
     // 6. Thread dédié pour lire stdin sans bloquer Qt
     InputReader reader;
-    QObject::connect(&reader, &InputReader::lineRead, [&](const QString& line) {
+
+    QObject::connect(&reader, &InputReader::lineRead, &a, [&](const QString& line) {
         int ttl = -1;
         QString message = line;
 
@@ -49,7 +50,8 @@ int main(int argc, char *argv[]) {
 
         if (!message.isEmpty())
             monClient.sendMessage(message, ttl);
-    });
+
+    }, Qt::QueuedConnection);
     reader.start();
 
     return a.exec();
