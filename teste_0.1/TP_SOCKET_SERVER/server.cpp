@@ -68,11 +68,10 @@ void Server::lireTexte() {
 }
 
 void Server::envoiTexte(QTcpSocket* destinataire, const QByteArray& data) {
-    QByteArray paquet;
-    QDataStream out(&paquet, QIODevice::WriteOnly);
-    out.setVersion(QDataStream::Qt_5_0);
-    out << data;
-    destinataire->write(paquet);
+    // On n'utilise plus QDataStream ici pour l'envoi final
+    // On envoie directement les octets au socket
+    destinataire->write(data);
+    destinataire->flush(); // Force l'envoi immédiat
 }
 
 void Server::clientDeconnecte() {

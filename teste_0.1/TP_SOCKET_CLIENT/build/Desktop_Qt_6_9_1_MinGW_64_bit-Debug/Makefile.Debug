@@ -19,7 +19,7 @@ CXXFLAGS      = -fno-keep-inline-dllexport -g -Wall -Wextra -Wextra -fexceptions
 INCPATH       = -I../../../TP_SOCKET_CLIENT -I. -I../../../../libsodium-win64/include -IC:/Qt/6.9.1/mingw_64/include -IC:/Qt/6.9.1/mingw_64/include/QtNetwork -IC:/Qt/6.9.1/mingw_64/include/QtCore -Idebug -IC:/Qt/6.9.1/mingw_64/mkspecs/win32-g++ 
 LINKER      =        g++
 LFLAGS        =        -Wl,-subsystem,console -mthreads
-LIBS        =        -LC:\Users\elric.evrard\Documents\GitHub\SovLink\libsodium-win64\lib -lsodium C:\Qt\6.9.1\mingw_64\lib\libQt6Network.a C:\Qt\6.9.1\mingw_64\lib\libQt6Core.a   
+LIBS        =        -LC:\Users\jean.chevrier\Documents\GitHub\SovLink\libsodium-win64\lib -lsodium -lws2_32 C:\Qt\6.9.1\mingw_64\lib\libQt6Network.a C:\Qt\6.9.1\mingw_64\lib\libQt6Core.a   
 QMAKE         = C:\Qt\6.9.1\mingw_64\bin\qmake.exe
 DEL_FILE      = del
 CHK_DIR_EXISTS= if not exist
@@ -70,7 +70,7 @@ all: Makefile.Debug  debug/TP_SOCKET_CLIENT.exe
 
 debug/TP_SOCKET_CLIENT.exe: C:/Qt/6.9.1/mingw_64/lib/libQt6Network.a C:/Qt/6.9.1/mingw_64/lib/libQt6Core.a $(OBJECTS) 
 	$(LINKER) $(LFLAGS) -o $(DESTDIR_TARGET) $(OBJECTS) $(LIBS)
-	copy /Y "C:\Users\elric.evrard\Documents\GitHub\SovLink\libsodium-win64\bin\libsodium.dll" "C:/Users/elric.evrard/Documents/GitHub/SovLink/teste_0.1/TP_SOCKET_CLIENT/build/Desktop_Qt_6_9_1_MinGW_64_bit-Debug"
+	copy /Y "C:\Users\jean.chevrier\Documents\GitHub\SovLink\libsodium-win64\bin\libsodium.dll" "C:/Users/jean.chevrier/Documents/GitHub/SovLink/teste_0.1/TP_SOCKET_CLIENT/build/Desktop_Qt_6_9_1_MinGW_64_bit-Debug"
 
 qmake: FORCE
 	@$(QMAKE) -o Makefile.Debug ..\..\TP_SOCKET_CLIENT.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug"
@@ -255,7 +255,7 @@ debug/moc_client.cpp: ../../client.h \
 		C:/Qt/6.9.1/mingw_64/include/QtCore/qrandom.h \
 		debug/moc_predefs.h \
 		C:/Qt/6.9.1/mingw_64/bin/moc.exe
-	C:\Qt\6.9.1\mingw_64\bin\moc.exe $(DEFINES) --include C:/Users/elric.evrard/Documents/GitHub/SovLink/teste_0.1/TP_SOCKET_CLIENT/build/Desktop_Qt_6_9_1_MinGW_64_bit-Debug/debug/moc_predefs.h -IC:/Qt/6.9.1/mingw_64/mkspecs/win32-g++ -IC:/Users/elric.evrard/Documents/GitHub/SovLink/teste_0.1/TP_SOCKET_CLIENT -IC:/Users/elric.evrard/Documents/GitHub/SovLink/libsodium-win64/include -IC:/Qt/6.9.1/mingw_64/include -IC:/Qt/6.9.1/mingw_64/include/QtNetwork -IC:/Qt/6.9.1/mingw_64/include/QtCore -I. -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++ -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/backward -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include-fixed -IC:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include ..\..\client.h -o debug\moc_client.cpp
+	C:\Qt\6.9.1\mingw_64\bin\moc.exe $(DEFINES) --include C:/Users/jean.chevrier/Documents/GitHub/SovLink/teste_0.1/TP_SOCKET_CLIENT/build/Desktop_Qt_6_9_1_MinGW_64_bit-Debug/debug/moc_predefs.h -IC:/Qt/6.9.1/mingw_64/mkspecs/win32-g++ -IC:/Users/jean.chevrier/Documents/GitHub/SovLink/teste_0.1/TP_SOCKET_CLIENT -IC:/Users/jean.chevrier/Documents/GitHub/SovLink/libsodium-win64/include -IC:/Qt/6.9.1/mingw_64/include -IC:/Qt/6.9.1/mingw_64/include/QtNetwork -IC:/Qt/6.9.1/mingw_64/include/QtCore -I. -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++ -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/backward -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include -IC:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include-fixed -IC:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include ..\..\client.h -o debug\moc_client.cpp
 
 compiler_moc_objc_header_make_all:
 compiler_moc_objc_header_clean:
