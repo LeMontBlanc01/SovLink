@@ -6,9 +6,9 @@
 
 int main(int argc, char *argv[]) {
     QCoreApplication a(argc, argv);
-        if (sodium_init() < 0) {
-            qFatal("Erreur libsodium");
-        }
+    if (sodium_init() < 0) {
+        qFatal("Erreur libsodium");
+    }
 
     Client monClient;
 
