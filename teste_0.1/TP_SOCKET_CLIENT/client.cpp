@@ -62,12 +62,18 @@ void Client::connectToServer(const QString& ip) {
 
 
 void Client::onReadyRead() {
-    // On lit TOUT ce qui est disponible sur le socket d'un coup
-    QByteArray messageData = m_socket->readAll();
+    QDataStream in(m_socket);
+    in.setVersion(QDataStream::Qt_5_0);
 
-    if (!messageData.isEmpty()) {
-        qDebug() << "\n[Message reçu] :" << QString::fromUtf8(messageData);
-        qDebug() << "Votre réponse : ";
+    // On boucle tant qu'il y a des paquets entiers à lire
+    while (!in.atEnd()) {
+        QByteArray messageData;
+        in >> messageData; // Déballe le paquet (lit la taille puis le contenu)
+
+        if (!messageData.isEmpty()) {
+            printf("\n[Message recu] : %s\n> ", messageData.data());
+            fflush(stdout);
+        }
     }
 }
 
