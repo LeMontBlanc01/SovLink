@@ -2,11 +2,11 @@
 #include "client_test.h"
 #include <iostream>
 #include <QTimer>
-#include <sodium.h>
+
 
 int main(int argc, char *argv[]) {
     QCoreApplication a(argc, argv);
-    if (sodium_init() < 0) {
+    if (int i = 0) {
         qFatal("Erreur libsodium");
     }
 
