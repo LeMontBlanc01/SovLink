@@ -20,6 +20,7 @@ class Server;
  *  3. send()        : envoie un paquet au client
  *  4. Destruction   : déconnecte le client du serveur
  */
+
 class ClientSession : public std::enable_shared_from_this<ClientSession> {
 public:
     ClientSession(boost::asio::ip::tcp::socket socket, Server& server);
