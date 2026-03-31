@@ -1,0 +1,56 @@
+#pragma once
+
+#include <boost/asio.hpp>
+#include <memory>
+#include <vector>
+#include <deque>
+#include <mutex>
+#include "Protocol.h"
+
+namespace sovlink {
+
+class Server;
+
+/**
+ * ClientSession — représente une connexion TCP d'un client sur le serveur.
+ *
+ * Cycle de vie :
+ *  1. start()       : lance la lecture asynchrone
+ *  2. handlePacket(): traite les paquets reçus (HANDSHAKE, MESSAGE, DISCONNECT)
+ *  3. send()        : envoie un paquet au client
+ *  4. Destruction   : déconnecte le client du serveur
+ */
+class ClientSession : public std::enable_shared_from_this<ClientSession> {
+public:
+    ClientSession(boost::asio::ip::tcp::socket socket, Server& server);
+    ~ClientSession();
+
+    void start();
+
+    /** Envoie un paquet de manière asynchrone (thread-safe) */
+    void send(const Packet& pkt);
+
+    const std::string& pubkeyHex() const { return m_pubkeyHex; }
+
+private:
+    void doReadHeader();
+    void doReadPayload(uint32_t type, uint32_t length);
+    void handlePacket(const Packet& pkt);
+    void doWrite();
+    void disconnect();
+
+    boost::asio::ip::tcp::socket  m_socket;
+    Server&                       m_server;
+    std::string                   m_pubkeyHex;
+    bool                          m_registered = false;
+
+    // Buffer de lecture
+    std::vector<uint8_t> m_readBuf;
+
+    // File d'envoi (thread-safe)
+    std::deque<std::vector<uint8_t>> m_writeQueue;
+    std::mutex                        m_writeMutex;
+    bool                              m_writing = false;
+};
+
+} // namespace sovlink
