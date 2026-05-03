@@ -26,7 +26,6 @@ private:
 
 private slots:
     void auDeconnecter(); // Nouveau slot pour le nettoyage
-
 };
 
 #endif // ROUTEURCISCO_H

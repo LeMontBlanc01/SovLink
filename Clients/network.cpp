@@ -81,8 +81,9 @@ void network::recevoirMessage() {
         });
     }
 }
-void network::connexionAuServeur(QString ip, int port) {
+bool network::connexionAuServeur(QString ip, int port) {
     socketClient->connectToHost(ip, port);
+    return socketClient->waitForConnected(3000);
 }
 void network::sonnerie2(QString message) {
     if (socketClient->state() == QAbstractSocket::ConnectedState) {

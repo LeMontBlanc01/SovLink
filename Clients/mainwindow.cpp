@@ -47,7 +47,16 @@ void MainWindow::on_Bouton_send_clicked() {
 void MainWindow::sonnerie1() {
     // SURTOUT PAS DE "new network" ICI !
     // On utilise l'objet qui est déjà branché à l'UI
-    instanceDeNetwork->connexionAuServeur("127.0.0.1", 12345);
+    bool connexionReussie = instanceDeNetwork->connexionAuServeur("127.0.0.1", 12345);
+
+    if(!connexionReussie) {
+        // La connexion a échoué (refusée, serveur éteint, etc.)
+        ui->Zone_lecture->append("<i style='color:red;'>Erreur : Impossible de se connecter au serveur. </i>");
+    } else {
+        // Optionnel : un message si ça a marché
+        ui->Zone_lecture->append("<i style='color:green;'>Connexion réussie !</i>");
+    }
+
 }
 
 MainWindow:: ~MainWindow()

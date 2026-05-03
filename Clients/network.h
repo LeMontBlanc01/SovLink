@@ -12,7 +12,7 @@ public:
     void envoyerMessage(const QString &message);
     void recevoirMessage();
     void sonnerie2(QString message);
-    void connexionAuServeur(QString ip, int port);
+    bool connexionAuServeur(QString ip, int port);
 private:
     QTcpSocket *connexion;
     QTcpSocket *socketClient; // C'est ici qu'on le déclare !
